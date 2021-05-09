@@ -10,11 +10,11 @@ public class PickUp : MonoBehaviour
 
      
 
-    public float edgeRight1;
+    public float edgeRight;
     public float edgeUp;    
     void Start(){
 
-        grabInstance = GameObject.Find("acilan").GetComponent<GrabAnimation>();
+        grabInstance = GameObject.Find("rightHand").GetComponent<GrabAnimation>();
         
     }
 
@@ -22,18 +22,21 @@ public class PickUp : MonoBehaviour
 
     IEnumerator waiter(){
         grabInstance.openHand();
-        edgeRight1 = this.transform.position.x + (this.transform.localScale.x / 2f); 
-        edgeUp = this.transform.position.y + (this.transform.localScale.y / 2f); 
-        Debug.Log(edgeRight1);
-        Vector3 pos = new Vector3(edgeRight1+0.1f,edgeUp,transform.position.z);
+        edgeRight = this.transform.position.x + (this.transform.localScale.x / 2f); 
+        edgeUp = this.transform.position.y + (this.transform.localScale.y * 2f); 
+        
+        Vector3 pos = new Vector3(edgeRight,edgeUp+0.08f,transform.position.z);
+
         grabInstance.handToObject(pos);
 
         yield return new WaitForSeconds(1);
         
         
         GetComponent<Rigidbody>().useGravity = false;
+
+
         this.transform.position = theDestination.position;
-        this.transform.parent = GameObject.Find("Grab").transform;
+        this.transform.parent = GameObject.Find("rightHand").transform;
         
         
     }
