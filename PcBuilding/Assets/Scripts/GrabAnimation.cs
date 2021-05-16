@@ -8,22 +8,30 @@ public class GrabAnimation : MonoBehaviour
     public Animator handOpenClose;
 
     bool limiter = false;
-    float animTimer=0f;
+    float animTimer = 0f;
+
+    Vector3 rightHandPos;
     Vector3 pos1;
-    Vector3 originalPos;
-    Quaternion originalRotation;
-    // Start is called before the first frame update
+    private Vector3 originalPos;
+    public int deneme = 0;
+
     void Start()
     {
         handOpenClose = GetComponent<Animator>();
+        originalPos = transform.position;
+        
+
     }
 
-    void Update(){
 
-        if(limiter){
-        transform.position =  Vector3.MoveTowards(transform.position,pos1,0.005f);
-        transform.Rotate(new Vector3(0f,0f,90f) * 0.005f);
-        animTimer+=Time.deltaTime;
+    void Update()
+    {
+
+        if (limiter)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, pos1, 0.005f);
+            transform.Rotate(new Vector3(0f, 0f, 90f) * 0.005f);
+            animTimer += Time.deltaTime;
 
             if (animTimer > 1f)
             {
@@ -33,29 +41,32 @@ public class GrabAnimation : MonoBehaviour
         }
     }
 
-    public void openHand(){
-        originalPos = transform.position;
-        originalRotation = transform.rotation;
-        handOpenClose.SetBool("Open",true);
-        
+    public void openHand()
+    {
+
+        handOpenClose.SetBool("Open", true);
+
 
     }
-    public void closeHand(){
-        handOpenClose.SetBool("Open",false);
+    public void closeHand()
+    {
+
         transform.position = originalPos;
-        transform.rotation = originalRotation;
-        
+        handOpenClose.SetBool("Open", false);
+
+
     }
 
 
-    public void handToObject(Vector3 pos){
+    public void handToObject(Vector3 pos)
+    {
 
-        
-       
+
+
         pos1 = pos;
         limiter = true;
 
-        
+
 
     }
 }

@@ -8,14 +8,14 @@ public class PickUp : MonoBehaviour
     public Transform theDestination;
     public static GrabAnimation grabInstance;
 
-     
+    GameObject rightHand;
 
     public float edgeRight;
     public float edgeUp;    
     void Start(){
 
         grabInstance = GameObject.Find("rightHand").GetComponent<GrabAnimation>();
-        
+        rightHand = GameObject.Find("rightHand");
     }
 
 
@@ -52,6 +52,7 @@ public class PickUp : MonoBehaviour
 
         this.transform.parent=null;
         GetComponent<Rigidbody>().useGravity = true;
+        
         grabInstance.closeHand();
         
     }
