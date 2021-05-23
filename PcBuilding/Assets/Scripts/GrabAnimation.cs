@@ -13,12 +13,13 @@ public class GrabAnimation : MonoBehaviour
     Vector3 rightHandPos;
     Vector3 pos1;
     private Vector3 originalPos;
+    private Quaternion originalRot;
     public int deneme = 0;
 
     void Start()
     {
         handOpenClose = GetComponent<Animator>();
-        originalPos = transform.position;
+        
         
 
     }
@@ -43,7 +44,8 @@ public class GrabAnimation : MonoBehaviour
 
     public void openHand()
     {
-
+        originalPos = this.transform.position;
+        originalRot = this.transform.rotation;
         handOpenClose.SetBool("Open", true);
 
 
@@ -51,7 +53,8 @@ public class GrabAnimation : MonoBehaviour
     public void closeHand()
     {
 
-        transform.position = originalPos;
+        transform.localPosition = new Vector3(0.6f,0.1f,0.95f);
+        transform.localEulerAngles = new Vector3(-2.5f,-15f,-70);
         handOpenClose.SetBool("Open", false);
 
 

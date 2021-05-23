@@ -9,51 +9,67 @@ public class PickUp : MonoBehaviour
     public static GrabAnimation grabInstance;
 
     GameObject rightHand;
+    
 
     public float edgeRight;
-    public float edgeUp;    
-    void Start(){
+    public float edgeUp;
+    void Start()
+    {
 
         grabInstance = GameObject.Find("rightHand").GetComponent<GrabAnimation>();
         rightHand = GameObject.Find("rightHand");
+        
+    }
+
+
+    void Update(){
+        
+
+
     }
 
 
 
-    IEnumerator waiter(){
+    IEnumerator waiter()
+    {
         grabInstance.openHand();
-        edgeRight = this.transform.position.x + (this.transform.localScale.x / 2f); 
-        edgeUp = this.transform.position.y + (this.transform.localScale.y * 2f); 
-        
-        Vector3 pos = new Vector3(edgeRight,edgeUp+0.08f,transform.position.z);
+        edgeRight = this.transform.position.x + (this.transform.localScale.x / 2f);
+        edgeUp = this.transform.position.y + (this.transform.localScale.y * 2f);
+
+        Vector3 pos = new Vector3(edgeRight, edgeUp + 0.08f, transform.position.z);
 
         grabInstance.handToObject(pos);
 
         yield return new WaitForSeconds(1);
-        
-        
+
+
         GetComponent<Rigidbody>().useGravity = false;
 
 
         this.transform.position = theDestination.position;
         this.transform.parent = GameObject.Find("rightHand").transform;
-        
-        
+
+
     }
 
-    void OnMouseDown(){
+    void OnMouseDown()
+    {
+
         StartCoroutine(waiter());
-        
-        
-        
+
+
+
     }
 
-    void OnMouseUp(){
+    void OnMouseUp()
+    {
 
-        this.transform.parent=null;
+        this.transform.parent = null;
         GetComponent<Rigidbody>().useGravity = true;
-        
+
         grabInstance.closeHand();
-        
+
     }
+
+     
 }
