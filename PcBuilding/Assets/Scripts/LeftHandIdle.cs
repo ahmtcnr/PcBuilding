@@ -9,6 +9,9 @@ public class LeftHandIdle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("yo");
+        animator = false;
+        stopper = false;
         StartCoroutine(idleAnimation());
     }
 
@@ -33,7 +36,17 @@ public class LeftHandIdle : MonoBehaviour
         }
     }
 
-    IEnumerator idleAnimation()
+    void OnEnabled(){
+        StartCoroutine(idleAnimation());
+        
+
+    }
+
+    void OnDisabled(){
+        StopCoroutine(idleAnimation());
+
+    }
+    public IEnumerator idleAnimation()
     {
 
         while (true)

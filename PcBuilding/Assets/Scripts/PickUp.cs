@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
 
-    public Transform theDestination;
+    private Transform theDestination;
     public static GrabAnimation grabInstance;
 
     GameObject rightHand;
@@ -15,7 +15,7 @@ public class PickUp : MonoBehaviour
     public float edgeUp;
     void Start()
     {
-
+        theDestination = GameObject.Find("Grab").GetComponent<Transform>();
         grabInstance = GameObject.Find("rightHand").GetComponent<GrabAnimation>();
         rightHand = GameObject.Find("rightHand");
         
